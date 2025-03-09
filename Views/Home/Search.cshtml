@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Search Videos";
+}
+
+<h2>Search YouTube Videos</h2>
+
+<form asp-action="Search" method="post">
+    <div class="form-group">
+        <label for="query">Search Query:</label>
+        <input type="text" class="form-control" id="query" name="query" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>

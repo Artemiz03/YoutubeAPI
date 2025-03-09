@@ -1,0 +1,38 @@
+﻿@model List<YoutubeAPI.Models.YouTubeVideo>
+
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<h2>Search Results</h2>
+
+@if (Model != null && Model.Any())
+{
+    <div class="row">
+        @foreach (var video in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="@video.ThumbnailUrl" class="card-img-top" alt="@video.Title">
+                    <div class="card-body">
+                        <h5 class="card-title">@video.Title</h5>
+                        <p class="card-text">@video.Description</p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                @video.ChannelTitle - @video.PublishedAt.ToString("yyyy-MM-dd")
+                            </small>
+                        </p>
+                        <!-- Add a button that links to the YouTube video -->
+                        <a href="https://www.youtube.com/watch?v=@video.VideoId" target="_blank" class="btn btn-primary">
+                            Watch on YouTube
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>No results found.</p>
+}
