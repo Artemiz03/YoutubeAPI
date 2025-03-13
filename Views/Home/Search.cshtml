@@ -2,12 +2,32 @@
     ViewData["Title"] = "Search Videos";
 }
 
-<h2>Search YouTube Videos</h2>
-
-<form asp-action="Search" method="post">
-    <div class="form-group">
-        <label for="query">Search Query:</label>
-        <input type="text" class="form-control" id="query" name="query" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Search</button>
-</form>
+<div class="container">
+    <h2>Search YouTube Videos</h2>
+    <form asp-action="Search" method="post" class="mb-4">
+        <div class="form-group">
+            <label for="query">Search Query:</label>
+            <input type="text" class="form-control" id="query" name="query" required>
+        </div>
+        <div class="form-group">
+            <label for="durationFilter">Duration:</label>
+            <select class="form-control" id="durationFilter" name="durationFilter">
+                <option value="">Any</option>
+                <option value="short">Short (&lt; 4 minutes)</option>
+                <option value="medium">Medium (4-20 minutes)</option>
+                <option value="long">Long (&gt; 20 minutes)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="dateFilter">Upload Date:</label>
+            <select class="form-control" id="dateFilter" name="dateFilter">
+                <option value="">Any</option>
+                <option value="lastHour">Last hour</option>
+                <option value="today">Today</option>
+                <option value="thisWeek">This week</option>
+                <option value="thisMonth">This month</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>

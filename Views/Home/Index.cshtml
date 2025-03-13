@@ -1,9 +1,46 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model List<YoutubeAPI.Models.YouTubeVideo>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to YouTube Search</h1>
-    <p>Use the search bar to find YouTube videos.</p>
-    <a asp-action="Search" asp-controller="Home" class="btn btn-primary">Search Videos</a>
+<h2 class="text-center">🔥 Trending YouTube Videos</h2>
+
+<!-- Search Bar -->
+<div class="container mb-4">
+    <form asp-action="Search" asp-controller="Home" method="post" class="d-flex justify-content-center">
+        <input type="text" name="query" class="form-control w-50" placeholder="Search for videos..." required />
+        <button type="submit" class="btn btn-primary ms-2">🔍 Search</button>
+    </form>
 </div>
+
+<!-- Trending Videos Section -->
+<div class="container">
+    <div class="row">
+        @foreach (var video in Model)
+        {
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="card shadow-sm">
+                    <img class="card-img-top" src="@video.ThumbnailUrl" alt="@video.Title">
+                    <div class="card-body">
+                        <h5 class="card-title">@video.Title</h5>
+                        <p class="card-text"><strong>Channel:</strong> @video.ChannelTitle</p>
+                        <a href="https://www.youtube.com/watch?v=@video.VideoId" class="btn btn-primary" target="_blank">Watch</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .card {
+        transition: 0.3s;
+        border-radius: 10px;
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+    .card-img-top {
+        height: 180px;
+        object-fit: cover;
+    }
+</style>

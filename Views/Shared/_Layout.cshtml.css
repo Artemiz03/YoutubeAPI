@@ -1,48 +1,78 @@
-﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿/* General Theme */
+body {
+    background-color: white;
+    color: black;
+    font-family: Arial, sans-serif;
 }
 
-a {
-  color: #0077cc;
+/* Navigation Bar */
+.navbar {
+    background-color: white !important;
+    border-bottom: 2px solid #FF0000;
 }
 
+    .navbar .nav-link {
+        color: black !important;
+        font-weight: bold;
+    }
+
+        .navbar .nav-link:hover {
+            color: #FF0000 !important;
+        }
+
+/* Buttons */
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    background-color: #FF0000 !important;
+    border-color: #FF0000 !important;
+    color: white !important;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    .btn-primary:hover {
+        background-color: #CC0000 !important;
+    }
+
+/* Search Bar */
+input.form-control {
+    border: 2px solid #FF0000;
+    border-radius: 25px;
+    padding: 10px;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    input.form-control:focus {
+        border-color: #CC0000;
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    }
+
+/* Video Cards */
+.card {
+    background-color: white;
+    border: 1px solid #ddd;
+    transition: 0.3s;
+    border-radius: 10px;
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+    }
+
+.card-img-top {
+    height: 180px;
+    object-fit: cover;
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+/* Pagination */
+.page-item .page-link {
+    color: black;
+    border: 1px solid #FF0000;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+.page-item.active .page-link {
+    background-color: #FF0000;
+    border-color: #FF0000;
+    color: white;
+}
+
+.page-item .page-link:hover {
+    background-color: rgba(255, 0, 0, 0.1);
 }
