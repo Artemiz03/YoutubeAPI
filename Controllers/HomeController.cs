@@ -11,7 +11,7 @@ namespace YouTubeAPIApp.Controllers
     public class HomeController : Controller
     {
         private readonly HttpClient _httpClient;
-        private const string ApiKey = "AIzaSyBBVTxvnQpeDDYq5McZ75vHYm81NWxZ-D0"; // Move this to appsettings.json
+        private const string ApiKey = "AIzaSyD37H-ap18CL-l-eBaNChQzvF3u7_uRvdc"; // Move this to appsettings.json
 
         public HomeController()
         {
