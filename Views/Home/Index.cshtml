@@ -5,10 +5,31 @@
 <!-- Search Bar -->
 <div class="container mb-4">
     <form asp-action="Search" asp-controller="Home" method="post" class="d-flex justify-content-center">
-        <input type="text" name="query" class="form-control w-50" placeholder="Search for videos..." required />
+        <input type="text" name="query" class="form-control w-50" placeholder="Search for videos..." value="@ViewBag.Query" required />
+
+        <!-- Duration Filter -->
+        <select name="durationFilter" class="form-select mx-2">
+            <option value="">Any Duration</option>
+            <option value="short" selected="@(ViewBag.DurationFilter == "short")">Short (0-4 min)</option>
+            <option value="medium" selected="@(ViewBag.DurationFilter == "medium")">Medium (4-20 min)</option>
+            <option value="long" selected="@(ViewBag.DurationFilter == "long")">Long (20+ min)</option>
+        </select>
+
+        <!-- Upload Date Filter -->
+        <select name="dateFilter" class="form-select mx-2">
+            <option value="">Any Time</option>
+            <option value="hour" selected="@(ViewBag.DateFilter == "hour")">Last Hour</option>
+            <option value="today" selected="@(ViewBag.DateFilter == "today")">Today</option>
+            <option value="week" selected="@(ViewBag.DateFilter == "week")">This Week</option>
+            <option value="month" selected="@(ViewBag.DateFilter == "month")">This Month</option>
+            <option value="year" selected="@(ViewBag.DateFilter == "year")">This Year</option>
+        </select>
+
         <button type="submit" class="btn btn-primary ms-2">🔍 Search</button>
     </form>
 </div>
+
+
 
 <!-- Trending Videos Section -->
 <div class="container">

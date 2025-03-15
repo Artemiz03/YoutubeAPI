@@ -25,25 +25,25 @@ namespace YouTubeAPIApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Search(string query)
+        public async Task<IActionResult> Search(string query, string durationFilter, string dateFilter)
         {
             if (string.IsNullOrWhiteSpace(query))
             {
                 return RedirectToAction("Index");
             }
 
-            return await FetchAndDisplayVideos(query, "", "", "", 1);
+            return await FetchAndDisplayVideos(query, durationFilter, dateFilter, "", 1);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Paginate(string query, string pageToken, int currentPage)
+        public async Task<IActionResult> Paginate(string query, string durationFilter, string dateFilter, string pageToken, int currentPage)
         {
             if (currentPage > 10)
             {
                 return RedirectToAction("Index");
             }
 
-            return await FetchAndDisplayVideos(query, "", "", pageToken, currentPage);
+            return await FetchAndDisplayVideos(query, durationFilter, dateFilter, pageToken, currentPage);
         }
 
         private async Task<IActionResult> FetchAndDisplayVideos(string query, string durationFilter, string dateFilter, string pageToken, int currentPage)
@@ -54,6 +54,8 @@ namespace YouTubeAPIApp.Controllers
             ViewBag.NextPageToken = nextPageToken;
             ViewBag.PrevPageToken = prevPageToken;
             ViewBag.Query = query;
+            ViewBag.DurationFilter = durationFilter;
+            ViewBag.DateFilter = dateFilter;
 
             return View("Results", videos);
         }
@@ -69,6 +71,16 @@ namespace YouTubeAPIApp.Controllers
                 if (!string.IsNullOrEmpty(pageToken))
                 {
                     searchUrl += $"&pageToken={pageToken}";
+                }
+
+                if (!string.IsNullOrEmpty(durationFilter))
+                {
+                    searchUrl += $"&videoDuration={durationFilter}";
+                }
+
+                if (!string.IsNullOrEmpty(dateFilter))
+                {
+                    searchUrl += $"&publishedAfter={GetPublishedAfterDate(dateFilter)}";
                 }
 
                 var response = await _httpClient.GetAsync(searchUrl);
@@ -113,6 +125,22 @@ namespace YouTubeAPIApp.Controllers
             catch (Exception)
             {
                 return (new List<YouTubeVideo>(), "", "");
+            }
+        }
+
+        private string GetPublishedAfterDate(string dateFilter)
+        {
+            if (string.IsNullOrEmpty(dateFilter)) return "";
+
+            DateTime now = DateTime.UtcNow;
+            switch (dateFilter)
+            {
+                case "hour": return now.AddHours(-1).ToString("yyyy-MM-ddTHH:mm:ssZ");
+                case "today": return now.Date.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                case "week": return now.AddDays(-7).ToString("yyyy-MM-ddTHH:mm:ssZ");
+                case "month": return now.AddMonths(-1).ToString("yyyy-MM-ddTHH:mm:ssZ");
+                case "year": return now.AddYears(-1).ToString("yyyy-MM-ddTHH:mm:ssZ");
+                default: return "";
             }
         }
     }
